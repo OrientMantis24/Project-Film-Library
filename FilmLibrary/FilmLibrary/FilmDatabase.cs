@@ -43,7 +43,7 @@ namespace FilmLibrary
                 while(reader.Read())
                 {
                     Films film = new Films();
-                    //film.FilmId = (int)reader["Id"];
+                    film.FilmId = (int)reader["Id"];
                     film.FilmTitle = reader["Title"].ToString();
                     film.FilmDescription = reader["Description"].ToString();
                     film.FilmGenres = reader["Genres"].ToString();
