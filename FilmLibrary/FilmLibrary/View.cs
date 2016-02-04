@@ -18,36 +18,43 @@ namespace FilmLibrary
             int selection = 0;
 
             Console.WriteLine("****Menu***");
-            Console.WriteLine("1. Choose film");
-            Console.WriteLine("2. Add a film");
-            Console.WriteLine("3. Edit a film");
-            Console.WriteLine("4. Search for a film");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("1. Film list");
+            Console.WriteLine("2. Choose film");
+            Console.WriteLine("3. Add a film");
+            Console.WriteLine("4. Edit a film");
+            Console.WriteLine("5. Search for a film");
+            Console.WriteLine("6. Exit");
             selection = int.Parse(Console.ReadLine());
 
-
             if (selection == 1)
+            {
+                myFoo = new Program.Foo(View.FilmList);
+                myFoo();
+
+                BackExit();
+            }
+            if (selection == 2)
             {
                 myFoo = new Program.Foo(View.ChooseAFilm);
                 myFoo();
             }
-            else if (selection == 2)
+            else if (selection == 3)
             {
                 myFoo = new Program.Foo(View.AddAFilm);
                 myFoo();
             }
-            else if (selection == 3)
+            else if (selection == 4)
             {
                 myFoo = new Program.Foo(View.EditAFilm);
                 myFoo();
             }
-            else if (selection == 4)
+            else if (selection == 5)
             {
                 myFoo = new Program.Foo(View.SearchAFilm);
                 myFoo();
 
             }
-            else if (selection == 5)
+            else if (selection == 6)
             {
                 Environment.Exit(0);
             }
@@ -61,9 +68,13 @@ namespace FilmLibrary
         {
             Console.Clear();
 
+            Console.WriteLine();
+
             int filmNumber = 1;
 
             Console.WriteLine("***All films in database***");
+            Console.WriteLine();
+
             foreach (Films aFilm in FilmDatabase.GetFilm())
             {
                 Console.WriteLine(filmNumber + " " + aFilm.FilmTitle);
@@ -122,7 +133,7 @@ namespace FilmLibrary
             filmDirector = Console.ReadLine().ToString();
             Console.Clear();
 
-            Console.WriteLine("Please write genree of the film");
+            Console.WriteLine("Please write genre of the film");
             filmGenres = Console.ReadLine().ToString();
             Console.Clear();
 
@@ -210,6 +221,9 @@ namespace FilmLibrary
                 }
                 selectedFilm++;
             }
+
+            Console.Clear();
+            BackExit();
         }
         public static void SearchAFilm()
         {
@@ -220,6 +234,8 @@ namespace FilmLibrary
                 DisplayFilm(Model.SearchForAFilm(filmTitle));
             else
                 Console.WriteLine("No films found :(");
+
+            Console.ReadLine();
         }
     }
 }

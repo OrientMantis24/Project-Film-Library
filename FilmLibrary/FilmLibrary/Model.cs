@@ -18,7 +18,7 @@ namespace FilmLibrary
         {
             foreach (Films aFilm in FilmDatabase.GetFilm())
             {
-                if(aFilm.FilmTitle.ToString().Equals(filmTitle.ToString()))
+                if(aFilm.FilmTitle.Trim() == filmTitle)
                 {
                     return aFilm;
                 }

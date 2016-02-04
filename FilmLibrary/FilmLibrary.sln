@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmLibrary", "FilmLibrary\FilmLibrary.csproj", "{98860CEC-7834-4D6E-8C28-86ED989D4F33}"
+	ProjectSection(ProjectDependencies) = postProject
+		{31C45B54-6253-40E2-B9D5-F1290AF893FE} = {31C45B54-6253-40E2-B9D5-F1290AF893FE}
+	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FilmsDatabaseProject", "FilmsDatabaseProject\FilmsDatabaseProject.sqlproj", "{31C45B54-6253-40E2-B9D5-F1290AF893FE}"
 EndProject
