@@ -21,7 +21,8 @@ namespace FilmLibrary
             Console.WriteLine("1. Choose film");
             Console.WriteLine("2. Add a film");
             Console.WriteLine("3. Edit a film");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine("4. Search for a film");
+            Console.WriteLine("5. Exit");
             selection = int.Parse(Console.ReadLine());
 
 
@@ -41,6 +42,12 @@ namespace FilmLibrary
                 myFoo();
             }
             else if (selection == 4)
+            {
+                myFoo = new Program.Foo(View.SearchAFilm);
+                myFoo();
+
+            }
+            else if (selection == 5)
             {
                 Environment.Exit(0);
             }
@@ -68,20 +75,20 @@ namespace FilmLibrary
         {
             FilmList();
 
-            int filmNumber = 1;
+            int filmNumber = 1, displayedFilm = 1;
             Console.WriteLine("Type a number of the movie you want to know more about");
             filmNumber = int.Parse(Console.ReadLine());
 
-            DisplayFilm(filmNumber);
-        }
-        public static void DisplayFilm(int filmNumber)
-        {
-            int selectedFilm = 1;
-
             foreach (Films aFilm in FilmDatabase.GetFilm())
             {
-                if(selectedFilm == filmNumber)
-                {
+                if (displayedFilm == filmNumber)
+                    DisplayFilm(aFilm);
+                else
+                    displayedFilm++;
+            }
+        }
+        public static void DisplayFilm(Films aFilm)
+        {
                     Console.Clear();
                     Console.WriteLine(aFilm.FilmTitle);
                     Console.WriteLine("------------------------------");
@@ -90,13 +97,7 @@ namespace FilmLibrary
                     Console.WriteLine(aFilm.FilmDirector);
                     Console.WriteLine("------------------------------");
                     Console.WriteLine(aFilm.FilmGenres);
-                    //Console.WriteLine("Press any button to continue...");
-                    //Console.ReadLine();
-                    break;
-                }
-                
-                selectedFilm++;
-            }
+            
 
             BackExit();
         }
@@ -209,6 +210,16 @@ namespace FilmLibrary
                 }
                 selectedFilm++;
             }
+        }
+        public static void SearchAFilm()
+        {
+            Console.WriteLine("Write a title of the film");
+            string filmTitle = Console.ReadLine().ToString();
+
+            if (Model.SearchForAFilm(filmTitle) != null)
+                DisplayFilm(Model.SearchForAFilm(filmTitle));
+            else
+                Console.WriteLine("No films found :(");
         }
     }
 }

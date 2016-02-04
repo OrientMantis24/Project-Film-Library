@@ -14,7 +14,18 @@ namespace FilmLibrary
             //View.AddAFilm();
         }
 
-        
+        public static Films SearchForAFilm(string filmTitle)
+        {
+            foreach (Films aFilm in FilmDatabase.GetFilm())
+            {
+                if(aFilm.FilmTitle.ToString().Equals(filmTitle.ToString()))
+                {
+                    return aFilm;
+                }
+            }
+
+            return null;
+        }
     }
        
 }
