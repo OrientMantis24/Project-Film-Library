@@ -13,6 +13,8 @@ namespace FilmLibrary
             FilmDatabase.AddFilm(filmTitle, filmDescription, filmDirector, filmGenres);
             //View.AddAFilm();
         }
+
+        
     }
        
 }

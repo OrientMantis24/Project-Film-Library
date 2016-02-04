@@ -10,7 +10,7 @@ namespace FilmLibrary
     {
         public delegate void Foo();
         static void Main(string[] args)
-        {
+         {
             View.GenerateMenu();
         }
     }
