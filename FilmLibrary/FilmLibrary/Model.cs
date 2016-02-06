@@ -14,11 +14,11 @@ namespace FilmLibrary
             //View.AddAFilm();
         }
 
-        public static Films SearchForAFilm(string filmTitle)
+        public static FILMS SearchForAFilm(string filmTitle)
         {
-            foreach (Films aFilm in FilmDatabase.GetFilm())
+            foreach (FILMS aFilm in FilmDatabase.GetFilm())
             {
-                if(aFilm.FilmTitle.Trim() == filmTitle)
+                if(aFilm.Title == filmTitle)
                 {
                     return aFilm;
                 }

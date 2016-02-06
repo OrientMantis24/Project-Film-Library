@@ -30,9 +30,9 @@ namespace FilmLibrary
             finally { conn.Close(); }
         }
 
-        public static List<Films> GetFilm()
+        public static List<FILMS> GetFilm()
         {
-            List<Films> filmsList = new List<Films>();
+            List<FILMS> filmsList = new List<FILMS>();
             SqlConnection conn = GetConnection();
             string selStmt = "SELECT * FROM FILMS ORDER BY TITLE";
             SqlCommand selCmd = new SqlCommand(selStmt, conn);
@@ -42,12 +42,12 @@ namespace FilmLibrary
                 SqlDataReader reader = selCmd.ExecuteReader();
                 while(reader.Read())
                 {
-                    Films film = new Films();
-                    film.FilmId = (int)reader["Id"];
-                    film.FilmTitle = reader["Title"].ToString();
-                    film.FilmDescription = reader["Description"].ToString();
-                    film.FilmDirector = reader["Director"].ToString();
-                    film.FilmGenres = reader["Genres"].ToString();
+                    FILMS film = new FILMS();
+                    film.Id = (int)reader["Id"];
+                    film.Title = reader["Title"].ToString();
+                    film.Description = reader["Description"].ToString();
+                    film.Director = reader["Director"].ToString();
+                    film.Genres = reader["Genres"].ToString();
                     filmsList.Add(film);
                 }
                 reader.Close();
@@ -63,9 +63,9 @@ namespace FilmLibrary
             string insStmt = "UPDATE FILMS SET Title='" + filmTitle + "', Description='" + filmDescription + "', Director='" + filmDirector + "', Genres='" + filmsGenres + "' WHERE Id='" + filmId + "'";
             SqlConnection conn = GetConnection();
             SqlCommand insCmd = new SqlCommand(insStmt, conn);
-            try { conn.Open(); insCmd.ExecuteNonQuery(); }
-            catch (SqlException ex) { throw ex; }
-            finally { conn.Close(); }
+            conn.Open(); insCmd.ExecuteNonQuery();
+            
+            conn.Close();
         }
     }
 }

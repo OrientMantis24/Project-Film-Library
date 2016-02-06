@@ -9,7 +9,7 @@ namespace FilmLibrary
     class View
 
     {
-        public static void GenerateMenu()
+        public static void ChooseOption()
         {
             Console.Clear();
 
@@ -26,42 +26,35 @@ namespace FilmLibrary
             Console.WriteLine("6. Exit");
             selection = int.Parse(Console.ReadLine());
 
-            if (selection == 1)
+            switch (selection)
             {
-                myFoo = new Program.Foo(View.FilmList);
-                myFoo();
-
-                BackExit();
-            }
-            if (selection == 2)
-            {
-                myFoo = new Program.Foo(View.ChooseAFilm);
-                myFoo();
-            }
-            else if (selection == 3)
-            {
-                myFoo = new Program.Foo(View.AddAFilm);
-                myFoo();
-            }
-            else if (selection == 4)
-            {
-                myFoo = new Program.Foo(View.EditAFilm);
-                myFoo();
-            }
-            else if (selection == 5)
-            {
-                myFoo = new Program.Foo(View.SearchAFilm);
-                myFoo();
-
-            }
-            else if (selection == 6)
-            {
-                Environment.Exit(0);
-            }
-            else
-            {
-                myFoo = new Program.Foo(View.GenerateMenu);
-                myFoo();
+                case 1:
+                    myFoo = FilmList;
+                    myFoo();
+                    break;
+                case 2:
+                    myFoo = ChooseAFilm;
+                    myFoo();
+                    break;
+                case 3:
+                    myFoo = AddAFilm;
+                    myFoo();
+                    break;
+                case 4:
+                    myFoo = EditAFilm;
+                    myFoo();
+                    break;
+                case 5:
+                    myFoo = SearchAFilm;
+                    myFoo();
+                    break;
+                case 6:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    myFoo = ChooseOption;
+                    myFoo();
+                    break;
             }
         }
         public static void FilmList()
@@ -75,22 +68,24 @@ namespace FilmLibrary
             Console.WriteLine("***All films in database***");
             Console.WriteLine();
 
-            foreach (Films aFilm in FilmDatabase.GetFilm())
+            foreach (FILMS aFilm in FilmDatabase.GetFilm())
             {
-                Console.WriteLine(filmNumber + " " + aFilm.FilmTitle);
+                Console.WriteLine(filmNumber + " " + aFilm.Title);
                 filmNumber++;
             }
+
+            BackExit();
             
         }
         public static void ChooseAFilm()
         {
             FilmList();
 
-            int filmNumber = 1, displayedFilm = 1;
+            int  displayedFilm = 1;
             Console.WriteLine("Type a number of the movie you want to know more about");
-            filmNumber = int.Parse(Console.ReadLine());
+            int filmNumber = int.Parse(Console.ReadLine());
 
-            foreach (Films aFilm in FilmDatabase.GetFilm())
+            foreach (FILMS aFilm in FilmDatabase.GetFilm())
             {
                 if (displayedFilm == filmNumber)
                     DisplayFilm(aFilm);
@@ -98,16 +93,16 @@ namespace FilmLibrary
                     displayedFilm++;
             }
         }
-        public static void DisplayFilm(Films aFilm)
+        public static void DisplayFilm(FILMS aFilm)
         {
                     Console.Clear();
-                    Console.WriteLine(aFilm.FilmTitle);
+                    Console.WriteLine(aFilm.Title);
                     Console.WriteLine("------------------------------");
-                    Console.WriteLine(aFilm.FilmDescription);
+                    Console.WriteLine(aFilm.Description);
                     Console.WriteLine("------------------------------");
-                    Console.WriteLine(aFilm.FilmDirector);
+                    Console.WriteLine(aFilm.Director);
                     Console.WriteLine("------------------------------");
-                    Console.WriteLine(aFilm.FilmGenres);
+                    Console.WriteLine(aFilm.Genres);
             
 
             BackExit();
@@ -116,25 +111,20 @@ namespace FilmLibrary
         {
             Console.Clear();
 
-            string filmTitle;
-            string filmDescription;
-            string filmDirector; 
-            string filmGenres;
-
             Console.WriteLine("Please write title of the film");
-            filmTitle = Console.ReadLine().ToString();
+            string filmTitle = Console.ReadLine();
             Console.Clear();
 
             Console.WriteLine("Please write description of the film");
-            filmDescription = Console.ReadLine().ToString();
+            string filmDescription = Console.ReadLine();
             Console.Clear();
 
             Console.WriteLine("Please write director of the film");
-            filmDirector = Console.ReadLine().ToString();
+            string filmDirector = Console.ReadLine();
             Console.Clear();
 
             Console.WriteLine("Please write genre of the film");
-            filmGenres = Console.ReadLine().ToString();
+            string filmGenres = Console.ReadLine();
             Console.Clear();
 
             Model.AddAFilm(filmTitle, filmDescription, filmDirector, filmGenres);
@@ -156,7 +146,7 @@ namespace FilmLibrary
 
             if (selection == 1)
             {
-                myFoo = new Program.Foo(View.GenerateMenu);
+                myFoo = new Program.Foo(View.ChooseOption);
                 myFoo();
             }
             if (selection == 2)
@@ -180,7 +170,7 @@ namespace FilmLibrary
 
             int selectedFilm = 1;
 
-            foreach (Films aFilm in FilmDatabase.GetFilm())
+            foreach (FILMS aFilm in FilmDatabase.GetFilm())
             {
                 if (selectedFilm == filmNumber)
                 {
@@ -188,7 +178,7 @@ namespace FilmLibrary
 
                     Console.Clear();
                     Console.WriteLine("Old title:");
-                    Console.WriteLine(aFilm.FilmTitle);
+                    Console.WriteLine(aFilm.Title);
                     Console.WriteLine("------------------------------");
                     Console.WriteLine("New title:");
                     filmTitle = Console.ReadLine().ToString();
@@ -196,26 +186,26 @@ namespace FilmLibrary
 
                     Console.Clear();
                     Console.WriteLine("Old description:");
-                    Console.WriteLine(aFilm.FilmDescription);
+                    Console.WriteLine(aFilm.Description);
                     Console.WriteLine("------------------------------");
                     Console.WriteLine("New description:");
                     filmDescription = Console.ReadLine().ToString();
 
                     Console.Clear();
                     Console.WriteLine("Old director:");
-                    Console.WriteLine(aFilm.FilmDirector);
+                    Console.WriteLine(aFilm.Director);
                     Console.WriteLine("------------------------------");
                     Console.WriteLine("New director:");
                     filmDirector = Console.ReadLine().ToString();
 
                     Console.Clear();
                     Console.WriteLine("Old genre:");
-                    Console.WriteLine(aFilm.FilmGenres);
+                    Console.WriteLine(aFilm.Genres);
                     Console.WriteLine("------------------------------");
                     Console.WriteLine("New genre:");
                     filmsGenres = Console.ReadLine().ToString();
 
-                    FilmDatabase.EditFilm(aFilm.FilmId, filmTitle, filmDescription, filmDirector, filmsGenres);
+                    FilmDatabase.EditFilm(aFilm.Id, filmTitle, filmDescription, filmDirector, filmsGenres);
 
                     break;
                 }
