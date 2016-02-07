@@ -31,6 +31,7 @@ namespace FilmLibrary
                 case 1:
                     myFoo = FilmList;
                     myFoo();
+                    BackExit();
                     break;
                 case 2:
                     myFoo = ChooseAFilm;
@@ -74,7 +75,7 @@ namespace FilmLibrary
                 filmNumber++;
             }
 
-            BackExit();
+            
             
         }
         public static void ChooseAFilm()
