@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FilmLibrary
 {
     class View
-
     {
         public static void ChooseOption()
         {
@@ -74,9 +69,6 @@ namespace FilmLibrary
                 Console.WriteLine(filmNumber + " " + aFilm.Title);
                 filmNumber++;
             }
-
-            
-            
         }
         public static void ChooseAFilm()
         {
@@ -103,7 +95,7 @@ namespace FilmLibrary
                     Console.WriteLine("------------------------------");
                     Console.WriteLine(aFilm.Director);
                     Console.WriteLine("------------------------------");
-                    Console.WriteLine(aFilm.Genres);
+                    Console.WriteLine(aFilm.Genre);
             
 
             BackExit();
@@ -134,8 +126,6 @@ namespace FilmLibrary
         }
         public static void BackExit()
         {
-
-
             Program.Foo myFoo;
             int selection = 0;
 
@@ -157,8 +147,7 @@ namespace FilmLibrary
             else
             {
                 myFoo = new Program.Foo(View.ChooseAFilm);
-                myFoo();         
-       
+                myFoo();
             }
         }
         public static void EditAFilm()
@@ -201,7 +190,7 @@ namespace FilmLibrary
 
                     Console.Clear();
                     Console.WriteLine("Old genre:");
-                    Console.WriteLine(aFilm.Genres);
+                    Console.WriteLine(aFilm.Genre);
                     Console.WriteLine("------------------------------");
                     Console.WriteLine("New genre:");
                     filmsGenres = Console.ReadLine().ToString();
